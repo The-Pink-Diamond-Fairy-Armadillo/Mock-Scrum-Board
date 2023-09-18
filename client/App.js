@@ -132,7 +132,7 @@ export default function App() {
 
   return (
     <div className='app'>
-      
+      <button onClick={addNewCategory}>Add New Category</button>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, categories, setCategories, users, setUsers)}
       >
@@ -141,9 +141,7 @@ export default function App() {
           {Object.entries(categories).map(([id, category]) => (
             <Category key={id} categoryId={id} category={category} addNewTask={addNewTask} removeTask={removeTask} editTask={editTask}/>
             ))}
-            <div className='add-category-container'>
             <button onClick={addNewCategory} className="add-category-button"> + New Section</button>
-            </div>
         </div>
       </DragDropContext>
     </div>

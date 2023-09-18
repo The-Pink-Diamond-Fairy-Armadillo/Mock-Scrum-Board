@@ -14,7 +14,7 @@ export default function Task({ task, index, onTaskClick, onTaskRemove }) {
           {...provided.dragHandleProps}
           style={{
             userSelect: 'none',
-            backgroundColor: snapshot.isDragging ? '#263B4A' :'#1e2f23',
+            backgroundColor: snapshot.isDragging ? '#263B4A' :'#263B4A',
             ...provided.draggableProps.style,
           }}
         >
