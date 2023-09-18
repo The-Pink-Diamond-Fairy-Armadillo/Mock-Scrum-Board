@@ -124,7 +124,7 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
                 task={{ ...task, Due_Date: formatDueDate(task.Due_Date) }}
                 index={index}
                 onTaskClick={handleTaskClick}
-                onTaskRemove={handleTaskRemove}
+                removeTask={removeTask}
               />
             ))}
             {provided.placeholder}
