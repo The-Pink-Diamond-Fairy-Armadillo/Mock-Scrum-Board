@@ -141,7 +141,6 @@ export default function App() {
 
   return (
     <div className='app'>
-      <button onClick={addNewCategory}>Add New Category</button>
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, categories, setCategories, users, setUsers)}
       >
