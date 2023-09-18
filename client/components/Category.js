@@ -98,7 +98,7 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
             {...provided.droppableProps}
             ref={provided.innerRef}
             style={{
-              background: snapshot.isDraggingOver ? '#0ead69' : '#ffffff',
+              background: snapshot.isDraggingOver ? '#d9d9d9' : '#ffffff',
               padding: 4,
               width: 250,
               minHeight: 500,
