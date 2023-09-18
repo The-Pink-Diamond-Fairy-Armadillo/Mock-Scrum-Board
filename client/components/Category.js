@@ -5,7 +5,6 @@ import TaskModal from './taskModal';
 import TaskDetailsModal from './taskDetailsModal';
 import { api } from '../utils/api';
 
-
 export default function Category({ category, categoryId, addNewTask, removeTask, editTask }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -14,7 +13,6 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(category.title); // Initialize with the existing title
 
- 
   const handleTitleClick = () => {
     setIsEditing(true);
   };
@@ -33,7 +31,6 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
     }
   };
   // TITLE EDITS =========================================
-
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -65,22 +62,19 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
   };
 
   const handleTaskRemove = async (taskData) => {
-    const removedTask = await api.removeTask({_id: taskData});
-    if (removedTask){
+    const removedTask = await api.removeTask({ _id: taskData });
+    if (removedTask) {
       removeTask(categoryId, removedTask);
       handleCloseModal();
     }
   };
-  
+
   const handleTaskEdit = async (taskData) => {
-    const edittedTask = await api.editTask({Task_Name: taskData});
-    if (edittedTask){
+    const edittedTask = await api.editTask({ Task_Name: taskData });
+    if (edittedTask) {
       editTask(categoryId, edittedTask);
     }
-
   };
-
-
 
   return (
     <div>
@@ -96,13 +90,13 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
               minHeight: 500,
               backgroundColor: '#FFFFF',
               borderRadius: '10px',
-              border: '1px solid #ccc', 
+              border: '1px solid #ccc',
             }}
           >
             {/* UPDATE TITLE HERE */}
-          {isEditing ? (
+            {isEditing ? (
               <input
-                type="text"
+                type='text'
                 value={editedTitle}
                 onChange={handleTitleChange}
                 onKeyPress={handleTitleKeyPress}
@@ -113,7 +107,14 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
             )}
 
             {category.items.map((task, index) => (
-              <Task key={task._id} task={task} index={index} onTaskClick={handleTaskClick} onTaskRemove={handleTaskRemove}/>
+              <Task
+                key={task._id}
+                task={task}
+                index={index}
+                onTaskClick={handleTaskClick}
+                removeTask={removeTask}
+                categoryId={categoryId}
+              />
             ))}
             {provided.placeholder}
             <TaskDetailsModal
@@ -125,7 +126,9 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
           </div>
         )}
       </Droppable>
-      <button onClick={handleOpenModal} className="add-task-button">+ Task</button>
+      <button onClick={handleOpenModal} className='add-task-button'>
+        + Task
+      </button>
       <TaskModal isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleFormSubmit} />
     </div>
   );
