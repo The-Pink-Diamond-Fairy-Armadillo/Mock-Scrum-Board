@@ -6,10 +6,11 @@ export default function App() {
   const dragItem = useRef();
   const dragOverItem = useRef();
 
+  // const Category = ({ id, title, taskList, index, dragStart, dragEnter, drop, handleAddTask }) => {
+
   const testCategory = [
-    {
-      key: 'Category 1',
-      name: 'Category 1',
+    { id: crypto.randomUUID(),
+      title: 'Category 1',
       tasks: [],
     },
   ];
@@ -20,7 +21,7 @@ export default function App() {
       Description: 'This is Task 1',
     },
     {
-      id: 2,
+      id: 2, 
       Task_Name: 'Task 2',
       Description: 'This is Task 2',
     },
@@ -72,7 +73,7 @@ export default function App() {
       <button onClick={handleAddTask}>Add Task</button>
       {categories.map((category) => (
         <Category
-          key={category}
+          key={category.id}
           name={category}
           tasks={tasks[category]}
           dragStart={dragStart}

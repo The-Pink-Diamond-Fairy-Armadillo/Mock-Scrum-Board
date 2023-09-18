@@ -13,11 +13,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import NewApp from './NewApp';
+
 import './stylesheets/app.css';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <App />
+    <NewApp />
   </BrowserRouter>
 );

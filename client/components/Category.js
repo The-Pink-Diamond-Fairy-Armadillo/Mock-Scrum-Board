@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import Task from './Task.js';
 
-const Category = ({ name, tasks, dragStart, dragEnter, drop, handleAddTask }) => {
+const Category = ({ id, title, taskList, index, dragStart, dragEnter, drop, handleAddTask }) => {
   const [taskOrder, setTaskOrder] = useState(tasks.map((task) => task.id));
 
   // Permission to drop into category
   const handleDragOver = (event) => {
     event.preventDefault();
-    console.log('Dragging over category');
+     console.log('Dragging over category');
   };
 
   const handleDragStart = (e, taskId) => {
