@@ -71,7 +71,6 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
       handleCloseModal();
     }
   };
-  
   const handleTaskEdit = async (taskData) => {
     const edittedTask = await api.editTask({Task_Name: taskData});
     if (edittedTask){
@@ -79,39 +78,37 @@ export default function Category({ category, categoryId, addNewTask, removeTask,
     }
 
   };
-
-
-
   return (
     <div>
+      {isEditing ? (
+        <input
+          type="text"
+          value={editedTitle}
+          onChange={handleTitleChange}
+          onKeyPress={handleTitleKeyPress}
+          onBlur={() => setIsEditing(false)}
+          className="category-inputTitle center-title-vertically"
+        />
+      ) : (
+        <h2 className="category-title center-title-vertically" onClick={handleTitleClick}>{category.name}</h2>
+      )}
       <Droppable droppableId={String(categoryId)} key={categoryId}>
         {(provided, snapshot) => (
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
             style={{
-              background: snapshot.isDraggingOver ? '#cdb4db' : '#ffffff',
+              background: snapshot.isDraggingOver ? '#0ead69' : '#ffffff',
               padding: 4,
               width: 250,
               minHeight: 500,
               backgroundColor: '#FFFFF',
-              borderRadius: '10px',
+              borderRadius: '0 0 10px 10px', 
               border: '1px solid #ccc', 
             }}
           >
             {/* UPDATE TITLE HERE */}
-          {isEditing ? (
-              <input
-                type="text"
-                value={editedTitle}
-                onChange={handleTitleChange}
-                onKeyPress={handleTitleKeyPress}
-                onBlur={() => setIsEditing(false)}
-              />
-            ) : (
-              <h2 onClick={handleTitleClick}>{category.name}</h2>
-            )}
-
+          
             {category.items.map((task, index) => (
               <Task key={task._id} task={task} index={index} onTaskClick={handleTaskClick} onTaskRemove={handleTaskRemove}/>
             ))}
