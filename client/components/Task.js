@@ -3,12 +3,12 @@ import { Draggable } from 'react-beautiful-dnd';
 import Category from './Category';
 import '../stylesheets/app.css';
 
-
-export default function Task({ task, index, onTaskClick, onTaskRemove }) {
+export default function Task({ task, index, onTaskClick, removeTask, categoryId }) {
   return (
     <Draggable draggableId={String(task._id)} index={index}>
       {(provided, snapshot) => (
-        <box className='taskDisplay'
+        <box
+          className='taskDisplay'
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -23,10 +23,10 @@ export default function Task({ task, index, onTaskClick, onTaskRemove }) {
           </div>
           <button
             className={`taskButton ${snapshot.isDragging ? 'dragged' : ''}`}
-            onClick={() => onTaskRemove(task._id)}
-          >Delete
+            onClick={() => removeTask(categoryId, task._id)}
+          >
+            Delete
           </button>
-
         </box>
       )}
     </Draggable>

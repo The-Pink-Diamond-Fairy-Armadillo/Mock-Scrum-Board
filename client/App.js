@@ -103,10 +103,10 @@ export default function App() {
       return updatedUsers;
     });
   };
-  
-  const removeTask = (categoryId, removeTask) => {
+
+  const removeTask = (categoryId, taskIdToRemove) => {
     const category = categories[categoryId];
-    const newItems = [];
+    const newItems = category.items.filter((task) => task._id !== taskIdToRemove);
 
     setCategories({
       ...categories,
@@ -114,6 +114,15 @@ export default function App() {
         ...category,
         items: newItems,
       },
+    });
+  };
+
+  const removeUser = (userId) => {
+    setUsers((prevUsers) => {
+      const updatedUsers = prevUsers.filter((user) => user._id !== userId);
+      console.log('Users before:', prevUsers);
+      console.log('Users after:', updatedUsers);
+      return updatedUsers;
     });
   };
 
@@ -136,12 +145,27 @@ export default function App() {
         onDragEnd={(result) => onDragEnd(result, categories, setCategories, users, setUsers)}
       >
         <div className='categories-container'>
-          <Users userId={'usersCategory'} users={users} addNewUser={addNewUser} />
+          <Users
+            userId={'usersCategory'}
+            users={users}
+            addNewUser={addNewUser}
+            removeUser={removeUser}
+          />
           {Object.entries(categories).map(([id, category]) => (
-            <Category key={id} categoryId={id} category={category} addNewTask={addNewTask} removeTask={removeTask} editTask={editTask}/>
+            <Category
+              key={id}
+              categoryId={id}
+              category={category}
+              addNewTask={addNewTask}
+              removeTask={removeTask}
+              editTask={editTask}
+            />
           ))}
           <div className='add-category-container'>
-            <button onClick={addNewCategory} className="add-category-button"> + New Section</button>
+            <button onClick={addNewCategory} className='add-category-button'>
+              {' '}
+              + New Section
+            </button>
           </div>
         </div>
       </DragDropContext>
